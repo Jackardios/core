@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Notifications;
+
+use App\Ship\Parents\Notifications\Notification;
+
+class {{class-name}} extends Notification
+{
+    public function __construct()
+    {
+        // ..
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            // ...
+        ];
+    }
+}

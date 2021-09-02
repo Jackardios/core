@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Actions;
+
+use App\Ship\Parents\Actions\SubAction;
+
+class {{class-name}} extends SubAction
+{
+    public function run()
+    {
+        // $var = app(Task::class)->run($arg1, $arg2);
+    }
+}

@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Data\Seeders;
+
+use App\Containers\AppSection\Authorization\Tasks\CreatePermissionTask;
+use App\Ship\Parents\Seeders\Seeder;
+
+class {{class-name}} extends Seeder
+{
+    public function run()
+    {
+        $createPermissionTask = app(CreatePermissionTask::class);
+        $createPermissionTask->run(
+            'view-{{kebab-entities}}',
+            'View any {{entities}}',
+            '{{entities}}'
+        );
+        $createPermissionTask->run(
+            'create-{{kebab-entities}}',
+            'Create {{entities}}',
+            '{{entities}}'
+        );
+        $createPermissionTask->run(
+            'update-{{kebab-entities}}',
+            'Update any {{entities}}',
+            '{{entities}}'
+        );
+        $createPermissionTask->run(
+            'delete-{{kebab-entities}}',
+            'Delete any {{entities}}',
+            '{{entities}}'
+        );
+        $createPermissionTask->run(
+            'force-delete-{{kebab-entities}}',
+            'Force delete any {{entities}}',
+            '{{entities}}'
+        );
+    }
+}

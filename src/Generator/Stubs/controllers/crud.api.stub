@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Controllers;
+
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Requests\Create{{model}}Request;
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Requests\Delete{{model}}Request;
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Requests\List{{models}}Request;
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Requests\View{{model}}Request;
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Requests\Update{{model}}Request;
+use App\Containers\{{section-name}}\{{container-name}}\UI\{{user-interface}}\Resources\{{model}}Resource;
+use App\Containers\{{section-name}}\{{container-name}}\Actions\Create{{model}}Action;
+use App\Containers\{{section-name}}\{{container-name}}\Actions\View{{model}}Action;
+use App\Containers\{{section-name}}\{{container-name}}\Actions\List{{models}}Action;
+use App\Containers\{{section-name}}\{{container-name}}\Actions\Update{{model}}Action;
+use App\Containers\{{section-name}}\{{container-name}}\Actions\Delete{{model}}Action;
+use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
+use App\Ship\Parents\Controllers\{{base-controller}};
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+class {{class-name}} extends {{base-controller}}
+{
+    public function view{{model}}(View{{model}}Request $request, {{model}} ${{entity}}): {{model}}Resource
+    {
+        ${{entity}} = app(View{{model}}Action::class)->run($request, ${{entity}});
+        return new {{model}}Resource(${{entity}});
+    }
+
+    public function list{{models}}(List{{models}}Request $request): ResourceCollection
+    {
+        ${{entities}} = app(List{{models}}Action::class)->run($request);
+        return {{model}}Resource::collection(${{entities}});
+    }
+
+    public function create{{model}}(Create{{model}}Request $request): {{model}}Resource
+    {
+        ${{entity}} = app(Create{{model}}Action::class)->run($request);
+        return (new {{model}}Resource(${{entity}}))->created();
+    }
+
+    public function update{{model}}(Update{{model}}Request $request, {{model}} ${{entity}}): {{model}}Resource
+    {
+        ${{entity}} = app(Update{{model}}Action::class)->run($request, ${{entity}});
+        return new {{model}}Resource(${{entity}});
+    }
+
+    public function delete{{model}}(Delete{{model}}Request $request, {{model}} ${{entity}}): JsonResponse
+    {
+        app(Delete{{model}}Action::class)->run($request, ${{entity}});
+        return $this->noContent();
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "name": "laraneat/core",
+    "description": "Laraneat core.",
+    "homepage": "https://github.com/laraneat/core/",
+    "support": {
+        "issues": "https://github.com/laraneat/core/issues",
+        "source": "https://github.com/laraneat/core"
+    },
+    "authors": [
+        {
+            "name": "Salakhutdinov Salavat",
+            "email": "salahutdinov.salavat@gmail.com"
+        }
+    ],
+    "keywords": [
+        "apiato",
+        "apiato core",
+        "laraneat",
+        "laraneat core",
+        "core",
+        "Porto",
+        "Porto SAP"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "jackardios/laravel-query-wizard": "dev-master",
+        "laraneat/container-installer": "dev-master",
+        "laravel/framework": "^8.0.0",
+        "spatie/laravel-permission": "^4.0.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "mockery/mockery": "^1.4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laraneat\\Core\\": "src/"
+        },
+        "files": [
+            "Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {}
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laraneat\\Core\\Providers\\LaraneatProvider",
+                "Laraneat\\Core\\Generator\\GeneratorsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

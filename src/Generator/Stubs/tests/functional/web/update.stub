@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\UI\WEB\Tests\Functional;
+
+use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
+use App\Containers\{{section-name}}\{{container-name}}\Tests\WebTestCase;
+
+/**
+ * Class {{class-name}}.
+ *
+ * @group {{_container-name}}
+ * @group web
+ */
+class {{class-name}} extends WebTestCase
+{
+    // the endpoint to be called within this test (e.g., {{endpoint}})
+    protected string $endpoint = '{{endpoint}}';
+
+    // fake some access rights
+    protected array $access = [
+        'permissions' => 'update-{{kebab-entities}}',
+        'roles'       => '',
+    ];
+
+    public function testUpdateExisting{{model}}WithAccess(): void
+    {
+        ${{entity}} = {{model}}::factory()->create();
+        $data = [
+            // 'key' => 'value'
+        ];
+
+        $response = $this->injectId(${{entity}}->id)->makeCall($data);
+
+        $response->assertStatus(200);
+        $this->assertResponseContainKeyValue([
+            'object' => '{{model}}',
+            // 'key' => $data['key'],
+        ]);
+        $this->assertDatabaseHas('{{table}}', [
+            'id' => ${{entity}}->id,
+            // 'key' => $data['key'],
+        ]);
+    }
+
+    public function testUpdateExisting{{model}}WithoutAccess(): void
+    {
+        $this->getTestingUserWithoutAccess();
+
+        ${{entity}} = {{model}}::factory()->create();
+        $data = [
+            // 'key' => 'value'
+        ];
+
+        $response = $this->injectId(${{entity}}->id)->makeCall($data);
+
+        $response->assertStatus(403);
+        // $this->assertDatabaseMissing('{{table}}', [
+        //     'key' => $data['key']
+        // ]);
+    }
+
+    public function testUpdateNonExisting{{model}}(): void
+    {
+        $data = [
+            'title' => 'Updated {{model}} Title',
+        ];
+        $fake{{model}}Id = 7777;
+
+        $response = $this->injectId($fake{{model}}Id)->makeCall($data);
+
+        $response->assertStatus(404);
+    }
+}

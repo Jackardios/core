@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\UI\API\Tests\Functional;
+
+use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
+use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
+
+/**
+ * Class {{class-name}}.
+ *
+ * @group {{_container-name}}
+ * @group api
+ */
+class {{class-name}} extends ApiTestCase
+{
+    // the endpoint to be called within this test (e.g., {{endpoint}})
+    protected string $endpoint = '{{endpoint}}';
+
+    // fake some access rights
+    protected array $access = [
+        'permissions' => 'view-{{kebab-entities}}',
+        'roles'       => '',
+    ];
+
+    public function testViewExisting{{model}}(): void
+    {
+        ${{entity}} = {{model}}::factory()->create();
+
+        $response = $this->injectId(${{entity}}->id)->makeCall();
+
+        $response->assertStatus(200);
+        $responseContent = $this->getResponseContentObject();
+
+        $this->assertResponseContainKeyValue([
+            // 'key' => ${{entity}}->key
+        ]);
+    }
+
+    public function testViewExisting{{model}}WithoutAccess(): void
+    {
+        $this->getTestingUserWithoutAccess();
+        ${{entity}} = {{model}}::factory()->create();
+
+        $response = $this->injectId(${{entity}}->id)->makeCall();
+
+        $response->assertStatus(403);
+    }
+
+    public function testViewNotExisting{{model}}(): void
+    {
+        $fake{{model}}Id = 7777;
+
+        $response = $this->injectId($fake{{model}}Id)->makeCall();
+
+        $response->assertStatus(404);
+    }
+}

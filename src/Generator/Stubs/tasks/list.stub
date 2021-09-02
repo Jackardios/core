@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Tasks;
+
+use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
+use App\Ship\Parents\Tasks\Task;
+
+class List{{models}}Task extends Task
+{
+    public function run(?bool $paginated = true)
+    {
+        return $paginated ? {{model}}::paginate() : {{model}}::all();
+    }
+}

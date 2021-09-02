@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Policies;
+
+use Laraneat\Core\Abstracts\Policies\Policy;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use {{namespaced-user-model}};
+
+class {{class-name}} extends Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Create a new policy instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+}

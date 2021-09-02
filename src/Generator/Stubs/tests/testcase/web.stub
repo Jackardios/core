@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Containers\{{section-name}}\{{container-name}}\Tests;
+
+use App\Containers\{{section-name}}\{{container-name}}\Tests\TestCase as BaseTestCase;
+
+/**
+ * Class {{class-name}}.
+ *
+ * This is the container WEB TestCase class. Use this class to add your container specific WEB related helper functions.
+ */
+class {{class-name}} extends BaseTestCase
+{
+    // ..
+}

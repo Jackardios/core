@@ -1,0 +1,6 @@
+{
+  "name": "laraneat/{{package-name}}",
+  "description": "{{container-name}} Container for laraneat.",
+  "require": {
+  }
+}
