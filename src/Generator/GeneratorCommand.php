@@ -64,13 +64,13 @@ abstract class GeneratorCommand extends Command
      */
     protected string $fileName;
 
-    protected $userData;
+    protected ?array $userData = null;
 
-    protected $parsedFileName;
+    protected ?string $parsedFileName = null;
 
-    protected $stubContent;
+    protected ?string $stubContent = null;
 
-    protected $renderedStubContent;
+    protected ?string $renderedStubContent = null;
 
     private IlluminateFilesystem $fileSystem;
 
@@ -88,7 +88,7 @@ abstract class GeneratorCommand extends Command
     }
 
     /**
-     * @void
+     * @return int|void
      *
      * @throws GeneratorErrorException|FileNotFoundException
      */
@@ -186,9 +186,7 @@ abstract class GeneratorCommand extends Command
     protected function removeSpecialChars($str): string
     {
         // remove everything that is NOT a character or digit
-        $str = preg_replace('/[^A-Za-z0-9]/', '', $str);
-
-        return $str;
+        return preg_replace('/[^A-Za-z0-9]/', '', $str);
     }
 
     /**
@@ -266,31 +264,22 @@ abstract class GeneratorCommand extends Command
     }
 
     /**
-     * @param      $arg
-     * @param bool $trim
-     *
-     * @return  array|string
-     */
-    protected function getInput($arg, $trim = true)
-    {
-        return $trim ? $this->trimString($this->argument($arg)) : $this->argument($arg);
-    }
-
-    /**
      * Checks if the param is set (via CLI), otherwise proposes choices to the user
      *
-     * @param $param
-     * @param $question
-     * @param $choices
-     * @param null $default
-     * @return array|string
+     * @param string $param
+     * @param string $question
+     * @param array $choices
+     * @param mixed $default
+     *
+     * @return string|array
      */
-    protected function checkParameterOrChoice($param, $question, $choices, $default = null)
+    protected function checkParameterOrChoice(string $param, string $question, array $choices, $default = null)
     {
-        // Check if we have already have a param set
+        // Check if we already have a param set
         $value = $this->option($param);
-        if ($value == null) {
-            // There was no value provided via CLI, so ask the user..
+
+        if ($value === null) {
+            // There was no value provided via CLI, so ask the user
             $value = $this->choice($question, $choices, $default);
         }
 
@@ -298,16 +287,17 @@ abstract class GeneratorCommand extends Command
     }
 
     /**
-     * @param      $param
-     * @param      $question
+     * @param string $param
+     * @param string $question
      * @param bool $default
      *
-     * @return mixed
+     * @return bool
      */
-    protected function checkParameterOrConfirm($param, $question, $default = false)
+    protected function checkParameterOrConfirm(string $param, string $question, $default = false)
     {
-        // Check if we have already have a param set
+        // Check if we already have a param set
         $value = $this->option($param);
+
         if ($value === null) {
             // There was no value provided via CLI, so ask the user..
             $value = $this->confirm($question, $default);
