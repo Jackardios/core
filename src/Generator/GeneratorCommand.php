@@ -42,7 +42,7 @@ abstract class GeneratorCommand extends Command
      *
      * @var string
      */
-    private const DEFAULT_SECTION_NAME = 'AppSection';
+    private const DEFAULT_SECTION_NAME = 'Main';
 
     /**
      * @var string
