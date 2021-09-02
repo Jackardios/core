@@ -40,7 +40,7 @@
             "Laraneat\\Core\\": "src/"
         },
         "files": [
-            "Helpers/helpers.php"
+            "src/Helpers/helpers.php"
         ]
     },
     "autoload-dev": {
