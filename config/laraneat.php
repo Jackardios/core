@@ -86,7 +86,7 @@ return [
         | Force Request Header to Contain header
         |--------------------------------------------------------------------------
         |
-        | By default, users can send request without defining the accept header and
+        | By default, users can send request without defining to accept header and
         | setting it to [ accept = application/json ].
         | To force the users to define that header, set this to true.
         | When set to true, a PHP exception will be thrown preventing users from access
@@ -106,7 +106,7 @@ return [
         | still request an invalid (i.e., not available) include parameter. This flag
         | determines, how to proceed in such a case:
         | When set to true, a PHP Exception will be thrown (default)
-        | When set to false, this invalid include will be skipped
+        | When set to false, this invalid includes will be skipped
         |
         */
         'force-valid-includes' => true,
