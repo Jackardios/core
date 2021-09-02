@@ -15,7 +15,7 @@ class ControllerGenerator extends GeneratorCommand implements ComponentsGenerato
      * "--container" and "--file" options, as they are globally handled. Just use the options which are specific to
      * this generator.
      *
-     * @var  array
+     * @var array
      */
     public array $inputs = [
         ['ui', null, InputOption::VALUE_OPTIONAL, 'The user-interface to generate the Controller for.'],

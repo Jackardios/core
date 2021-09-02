@@ -12,7 +12,7 @@ class EventHandlerGenerator extends GeneratorCommand implements ComponentsGenera
      * User required/optional inputs expected to be passed while calling the command.
      * This is a replacement of the `getArguments` function "which reads whenever it's called".
      *
-     * @var  array
+     * @var array
      */
     public array $inputs = [
         ['event', null, InputOption::VALUE_OPTIONAL, 'The Event to generate this Handler for'],

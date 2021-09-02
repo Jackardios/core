@@ -41,21 +41,21 @@ class ContainerGenerator extends GeneratorCommand implements ComponentsGenerator
     /**
      * The structure of the file path.
      *
-     * @var  string
+     * @var string
      */
     protected string $pathStructure = '{section-name}/{container-name}/*';
 
     /**
      * The structure of the file name.
      *
-     * @var  string
+     * @var string
      */
     protected string $nameStructure = '{file-name}';
 
     /**
      * The name of the stub file.
      *
-     * @var  string
+     * @var string
      */
     protected string $stubName = 'composer.stub';
 

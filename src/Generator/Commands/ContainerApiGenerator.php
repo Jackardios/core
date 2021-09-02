@@ -14,7 +14,7 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
      * User required/optional inputs expected to be passed while calling the command.
      * This is a replacement of the `getArguments` function "which reads whenever it's called".
      *
-     * @var  array
+     * @var array
      */
     public array $inputs = [
         ['docversion', null, InputOption::VALUE_OPTIONAL, 'The version of all endpoints to be generated (1, 2, ...)'],
