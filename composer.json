@@ -31,8 +31,9 @@
         "spatie/laravel-permission": "^4.0.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
-        "mockery/mockery": "^1.4.2"
+        "fakerphp/faker": "^1.15",
+        "mockery/mockery": "^1.4.2",
+        "roave/security-advisories": "dev-latest"
     },
     "autoload": {
         "psr-4": {
