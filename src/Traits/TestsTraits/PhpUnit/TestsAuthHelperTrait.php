@@ -2,14 +2,20 @@
 
 namespace Laraneat\Core\Traits\TestsTraits\PhpUnit;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Faker\Generator;
 
+/**
+ * @property Generator $faker
+ */
 trait TestsAuthHelperTrait
 {
     /**
      * Logged in user object.
      */
-    protected $testingUser = null;
+    protected ?UserContract $testingUser = null;
 
     /**
      * User class used by factory to create testing user
@@ -40,9 +46,9 @@ trait TestsAuthHelperTrait
      * if unauthorized user tried to access your protected endpoint.
      *
      * @param null $userDetails
-     * @return mixed
+     * @return UserContract|null
      */
-    public function getTestingUserWithoutAccess($userDetails = null)
+    public function getTestingUserWithoutAccess($userDetails = null): ?UserContract
     {
         return $this->getTestingUser($userDetails, $this->getNullAccess());
     }
@@ -59,9 +65,9 @@ trait TestsAuthHelperTrait
      * @param array|null $userDetails what to be attached on the User object
      * @param array|null $access roles and permissions you'd like to provide this user with
      * @param bool $createUserAsAdmin should create testing user as admin
-     * @return mixed
+     * @return UserContract|null
      */
-    public function getTestingUser(?array $userDetails = null, ?array $access = null, bool $createUserAsAdmin = false)
+    public function getTestingUser(?array $userDetails = null, ?array $access = null, bool $createUserAsAdmin = false): ?UserContract
     {
         $this->createUserAsAdmin = $createUserAsAdmin;
         $this->userClass = $this->userclass ?? config('laraneat.tests.user-class');
@@ -70,12 +76,12 @@ trait TestsAuthHelperTrait
             : $this->createTestingUser($userDetails, $access);
     }
 
-    private function findOrCreateTestingUser($userDetails, $access)
+    private function findOrCreateTestingUser($userDetails, $access): UserContract
     {
         return $this->testingUser ?: $this->createTestingUser($userDetails, $access);
     }
 
-    private function createTestingUser(?array $userDetails = null, ?array $access = null)
+    private function createTestingUser(?array $userDetails = null, ?array $access = null): ?UserContract
     {
         // create new user
         $user = $this->factoryCreateUser($userDetails);
@@ -90,7 +96,7 @@ trait TestsAuthHelperTrait
         return $this->testingUser = $user;
     }
 
-    private function factoryCreateUser(?array $userDetails = null)
+    private function factoryCreateUser(?array $userDetails = null): UserContract
     {
         $user = str_replace('::class', '', $this->userClass);
         if ($this->createUserAsAdmin) {
@@ -129,9 +135,7 @@ trait TestsAuthHelperTrait
         $access = $access ?: $this->getAccess();
 
         $user = $this->setupTestingUserPermissions($user, $access);
-        $user = $this->setupTestingUserRoles($user, $access);
-
-        return $user;
+        return $this->setupTestingUserRoles($user, $access);
     }
 
     private function getAccess(): ?array
