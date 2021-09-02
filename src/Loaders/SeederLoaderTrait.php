@@ -5,13 +5,14 @@ namespace Laraneat\Core\Loaders;
 use Laraneat\Core\Foundation\Facades\Laraneat;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Seeder;
 
 /**
  * This class is different from other loaders as it is not called by AutoLoaderTrait
  * It is called "database/seeders/DatabaseSeeder.php", Laravel main seeder and only load seeder from
  * Containers (not from "app/Ship/seeders").
  *
- * @method void call
+ * @mixin Seeder
  */
 trait SeederLoaderTrait
 {
