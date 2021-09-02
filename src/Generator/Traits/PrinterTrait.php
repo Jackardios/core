@@ -4,33 +4,33 @@ namespace Laraneat\Core\Generator\Traits;
 
 trait PrinterTrait
 {
-    public function printStartedMessage($containerName, $fileName)
+    public function printStartedMessage(string $containerName, string $fileName): void
     {
         $this->printInfoMessage('> Generating (' . $fileName . ') in (' . $containerName . ') Container.');
     }
 
     /**
-     * @param $type
+     * @param string $type
      *
      * @return void
      */
-    public function printFinishedMessage($type)
+    public function printFinishedMessage(string $type): void
     {
         $this->printInfoMessage($type . ' generated successfully.');
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
-    public function printErrorMessage($message)
+    public function printErrorMessage(string $message): void
     {
         $this->error($message);
     }
 
     /**
-     * @param $message
+     * @param string $message
      */
-    public function printInfoMessage($message)
+    public function printInfoMessage(string $message): void
     {
         $this->info($message);
     }

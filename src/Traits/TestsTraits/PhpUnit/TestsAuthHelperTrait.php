@@ -2,10 +2,10 @@
 
 namespace Laraneat\Core\Traits\TestsTraits\PhpUnit;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Faker\Generator;
+use LogicException;
 
 /**
  * @property Generator $faker
@@ -54,11 +54,11 @@ trait TestsAuthHelperTrait
     }
 
     /**
-     * Try to get the last logged in User, if not found then create new one.
+     * Try to get the last logged-in User, if not found then create new one.
      * Note: if $userDetails are provided it will always create new user, even
      * if another one was previously created during the execution of your test.
      *
-     * By default Users will be given the Roles and Permissions found int he class
+     * By default, Users will be given the Roles and Permissions found in the class
      * `$access` property. But the $access parameter can be used to override the
      * defined roles and permissions in the `$access` property of your class.
      *
@@ -70,7 +70,12 @@ trait TestsAuthHelperTrait
     public function getTestingUser(?array $userDetails = null, ?array $access = null, bool $createUserAsAdmin = false): ?UserContract
     {
         $this->createUserAsAdmin = $createUserAsAdmin;
-        $this->userClass = $this->userclass ?? config('laraneat.tests.user-class');
+        $this->userClass = $this->userClass ?? config('laraneat.tests.user-class');
+
+        if (!$this->userClass) {
+            throw new LogicException("User class was not provided");
+        }
+
         $this->userAdminState = config('laraneat.tests.user-admin-state');
         return is_null($userDetails) ? $this->findOrCreateTestingUser($userDetails, $access)
             : $this->createTestingUser($userDetails, $access);

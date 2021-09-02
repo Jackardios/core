@@ -26,7 +26,7 @@ abstract class TestCase extends LaravelTestCase
     protected string $baseUrl;
 
     /**
-     * Setup the test environment, before each test.
+     * Set up the test environment, before each test.
      */
     public function setUp(): void
     {

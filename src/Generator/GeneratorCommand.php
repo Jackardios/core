@@ -33,7 +33,7 @@ abstract class GeneratorCommand extends Command
     private const STUB_PATH = 'Stubs/*';
 
     /**
-     * Relative path for the custom stubs (relative to the app/Ship directory!
+     * Relative path for the custom stubs (relative to the app/Ship directory)
      */
     private const CUSTOM_STUB_PATH = 'Generators/CustomStubs/*';
 
@@ -103,8 +103,9 @@ abstract class GeneratorCommand extends Command
         // Now fix the section, container and file name
         $this->sectionName = $this->removeSpecialChars($this->sectionName);
         $this->containerName = $this->removeSpecialChars($this->containerName);
-        if (!$this->fileType === 'Configuration')
+        if ($this->fileType !== 'Configuration') {
             $this->fileName = $this->removeSpecialChars($this->fileName);
+        }
 
         // And we are ready to start
         $this->printStartedMessage($this->sectionName . ':' . $this->containerName, $this->fileName);
@@ -160,10 +161,10 @@ abstract class GeneratorCommand extends Command
      */
     protected function checkParameterOrAsk($param, $question, $default = null)
     {
-        // Check if we have already have a param set
+        // Check if we already have a param set
         $value = $this->option($param);
-        if ($value == null) {
-            // There was no value provided via CLI, so ask the user..
+        if ($value === null) {
+            // There was no value provided via CLI, so ask the user.
             $value = $this->ask($question, $default);
         }
 
@@ -293,13 +294,13 @@ abstract class GeneratorCommand extends Command
      *
      * @return bool
      */
-    protected function checkParameterOrConfirm(string $param, string $question, $default = false)
+    protected function checkParameterOrConfirm(string $param, string $question, $default = false): bool
     {
         // Check if we already have a param set
         $value = $this->option($param);
 
         if ($value === null) {
-            // There was no value provided via CLI, so ask the user..
+            // There was no value provided via CLI, so ask the user.
             $value = $this->confirm($question, $default);
         }
 

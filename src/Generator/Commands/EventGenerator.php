@@ -69,7 +69,7 @@ class EventGenerator extends GeneratorCommand implements ComponentsGenerator
                 '--event' => $this->fileName
             ]);
 
-            if ($status == 0) {
+            if ($status === 0) {
                 $this->printInfoMessage('The Handler for Event was successfully generated');
             } else {
                 $this->printErrorMessage('Could not generate the corresponding Handler!');

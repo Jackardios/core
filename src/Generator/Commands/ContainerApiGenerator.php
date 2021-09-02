@@ -124,7 +124,7 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
             '--model' => $model,
         ]);
 
-        // create a API Resource for the model
+        // create an API Resource for the model
         $this->printInfoMessage('Generating Resource for the Model');
         $this->call('laraneat:generate:resource', [
             '--section' => $sectionName,
@@ -282,7 +282,7 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
             }
         }
 
-        // finally generate the controller
+        // finally, generate the controller
         $this->printInfoMessage('Generating Controller to wire everything together');
         $this->call('laraneat:generate:controller', [
             '--section' => $sectionName,

@@ -20,7 +20,7 @@ class Dispatcher extends EventDispatcher
      * @param  bool  $halt
      * @return array|null
      */
-    public function dispatch($event, $payload = [], $halt = false)
+    public function dispatch($event, $payload = [], $halt = false): ?array
     {
         // Handle event Async when ShouldHandle Interface is implemented
         if ($event instanceof ShouldHandle) {

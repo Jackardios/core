@@ -288,7 +288,7 @@ class ContainerWebGenerator extends GeneratorCommand implements ComponentsGenera
             }
         }
 
-        // finally generate the controller
+        // finally, generate the controller
         $this->printInfoMessage('Generating Controller to wire everything together');
         $this->call('laraneat:generate:controller', [
             '--section' => $sectionName,

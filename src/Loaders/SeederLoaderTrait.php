@@ -72,7 +72,7 @@ trait SeederLoaderTrait
 
         foreach ($seedersClasses as $key => $seederFullClassName) {
             // if the class full namespace contain "_" it means it needs to be seeded in order
-            if (false !== strpos($seederFullClassName, "_")) {
+            if (str_contains($seederFullClassName, "_")) {
                 // move all the seeder classes that needs to be seeded in order to their own Collection
                 $orderedSeederClasses->push($seederFullClassName);
                 // delete the moved classes from the original collection
