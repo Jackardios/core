@@ -25,7 +25,6 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "jackardios/laravel-query-wizard": "dev-master",
         "laraneat/container-installer": "dev-master",
         "laravel/framework": "^8.0.0",
         "spatie/laravel-permission": "^4.0.0"
