@@ -9,11 +9,14 @@ class Laraneat
     /**
      * The Laraneat version.
      */
-    public const VERSION = '10.0.0';
+    public const VERSION = '1.0.0';
 
-    private const SHIP_NAME = 'ship';
+    private const SHIP_DIRECTORY_NAME = 'Ship';
     private const CONTAINERS_DIRECTORY_NAME = 'Containers';
 
+    /**
+     * @return string[]
+     */
     public function getShipFoldersNames(): array
     {
         $portFoldersNames = [];
@@ -25,15 +28,21 @@ class Laraneat
         return $portFoldersNames;
     }
 
+    /**
+     * @return string[]
+     */
     public function getShipPath(): array
     {
-        return File::directories(app_path(self::SHIP_NAME));
+        return File::directories(app_path(self::SHIP_DIRECTORY_NAME));
     }
 
+    /**
+     * @return string[]
+     */
     public function getSectionContainerNames(string $sectionName): array
     {
         $containerNames = [];
-        foreach (File::directories($this->getSectionPath($sectionName)) as $key => $name) {
+        foreach (File::directories($this->getSectionPath($sectionName)) as $name) {
             $containerNames[] = basename($name);
         }
         return $containerNames;
@@ -49,7 +58,7 @@ class Laraneat
      *
      * @param $filePathName
      *
-     * @return  mixed
+     * @return mixed
      */
     public function getClassObjectFromFile($filePathName)
     {
@@ -64,7 +73,7 @@ class Laraneat
      *
      * @param $filePathName
      *
-     * @return  string
+     * @return string
      */
     public function getClassFullNameFromFile($filePathName): string
     {
@@ -76,7 +85,7 @@ class Laraneat
      *
      * @param $filePathName
      *
-     * @return  null|string
+     * @return null|string
      */
     protected function getClassNamespaceFromFile($filePathName): ?string
     {
@@ -115,7 +124,7 @@ class Laraneat
      *
      * @param $filePathName
      *
-     * @return  mixed
+     * @return mixed
      */
     protected function getClassNameFromFile($filePathName)
     {
@@ -143,7 +152,7 @@ class Laraneat
      *
      * @param $className
      *
-     * @return  mixed
+     * @return mixed
      */
     public function getClassType($className)
     {
@@ -152,6 +161,9 @@ class Laraneat
         return end($array);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllContainerNames(): array
     {
         $containersNames = [];
@@ -163,6 +175,9 @@ class Laraneat
         return $containersNames;
     }
 
+    /**
+     * @return string[]
+     */
     public function getAllContainerPaths(): array
     {
         $sectionNames = $this->getSectionNames();
@@ -176,6 +191,9 @@ class Laraneat
         return $containerPaths;
     }
 
+    /**
+     * @return string[]
+     */
     public function getSectionNames(): array
     {
         $sectionNames = [];
@@ -187,11 +205,17 @@ class Laraneat
         return $sectionNames;
     }
 
+    /**
+     * @return string[]
+     */
     public function getSectionPaths(): array
     {
         return File::directories(app_path(self::CONTAINERS_DIRECTORY_NAME));
     }
 
+    /**
+     * @return string[]
+     */
     public function getSectionContainerPaths(string $sectionName): array
     {
         return File::directories(app_path(self::CONTAINERS_DIRECTORY_NAME . DIRECTORY_SEPARATOR . $sectionName));
