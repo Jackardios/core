@@ -5,7 +5,6 @@ namespace Laraneat\Core\Traits\TestsTraits\PhpUnit;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 use Faker\Generator;
-use JetBrains\PhpStorm\ArrayShape;
 use LogicException;
 
 /**
