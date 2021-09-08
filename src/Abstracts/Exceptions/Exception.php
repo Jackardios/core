@@ -53,7 +53,7 @@ abstract class Exception extends BaseException
      * Usage: `throw (new MyCustomException())->debug($e)`.
      *
      * @param $error
-     * @param $force
+     * @param bool $force
      *
      * @return $this
      */
