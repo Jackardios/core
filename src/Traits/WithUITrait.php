@@ -18,7 +18,7 @@ trait WithUITrait
      * @param string $ui
      * @return $this
      */
-    public function setUI(string $ui): self
+    public function setUI(string $ui)
     {
         $this->ui = $ui;
 
