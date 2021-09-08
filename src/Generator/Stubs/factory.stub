@@ -6,10 +6,10 @@ use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
 use App\Ship\Abstracts\Factories\Factory;
 
 /**
- * @method {{model}}|\Illuminate\Support\Collection<{{model}}> create($attributes = [], ?Model $parent = null)
- * @method \Illuminate\Support\Collection<{{model}}> createMany(iterable $records)
+ * @method \Illuminate\Support\Collection|{{model}} create($attributes = [], ?{{model}} $parent = null)
+ * @method \Illuminate\Support\Collection createMany(iterable $records)
  * @method {{model}} createOne($attributes = [])
- * @method {{model}}|\Illuminate\Support\Collection<{{model}}> make($attributes = [], ?Model $parent = null)
+ * @method \Illuminate\Support\Collection|{{model}} make($attributes = [], ?{{model}} $parent = null)
  * @method {{model}} makeOne($attributes = [])
  */
 class {{class-name}} extends Factory
