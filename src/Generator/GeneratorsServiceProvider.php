@@ -25,8 +25,6 @@ use Laraneat\Core\Generator\Commands\ResourceGenerator;
 use Laraneat\Core\Generator\Commands\RouteGenerator;
 use Laraneat\Core\Generator\Commands\SeederGenerator;
 use Laraneat\Core\Generator\Commands\ServiceProviderGenerator;
-use Laraneat\Core\Generator\Commands\SubActionGenerator;
-use Laraneat\Core\Generator\Commands\TaskGenerator;
 use Laraneat\Core\Generator\Commands\TestFunctionalTestGenerator;
 use Laraneat\Core\Generator\Commands\TestTestCaseGenerator;
 use Laraneat\Core\Generator\Commands\TestUnitTestGenerator;
@@ -74,11 +72,9 @@ class GeneratorsServiceProvider extends ServiceProvider
             RouteGenerator::class,
             SeederGenerator::class,
             ServiceProviderGenerator::class,
-            SubActionGenerator::class,
             TestFunctionalTestGenerator::class,
             TestTestCaseGenerator::class,
             TestUnitTestGenerator::class,
-            TaskGenerator::class,
             ValueGenerator::class
         ]);
     }

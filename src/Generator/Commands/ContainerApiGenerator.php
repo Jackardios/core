@@ -165,7 +165,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
 
         $this->printInfoMessage('Creating Requests for Routes');
         $this->printInfoMessage('Generating Default Actions');
-        $this->printInfoMessage('Generating Default Tasks');
 
         $routes = [
             [
@@ -176,7 +175,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                 'url' => $url,
                 'action' => 'List' . $models . 'Action',
                 'request' => 'List' . $models . 'Request',
-                'task' => 'List' . $models . 'Task',
                 'test' => 'List' . $models . 'Test',
             ],
             [
@@ -187,7 +185,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                 'url' => $url . '/{' . $modelRouteKey . '}',
                 'action' => 'View' . $model . 'Action',
                 'request' => 'View' . $model . 'Request',
-                'task' => null,
                 'test' => 'View' . $model . 'Test',
             ],
             [
@@ -198,7 +195,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                 'url' => $url,
                 'action' => 'Create' . $model . 'Action',
                 'request' => 'Create' . $model . 'Request',
-                'task' => 'Create' . $model . 'Task',
                 'test' => 'Create' . $model . 'Test',
             ],
             [
@@ -209,7 +205,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                 'url' => $url . '/{' . $modelRouteKey . '}',
                 'action' => 'Update' . $model . 'Action',
                 'request' => 'Update' . $model . 'Request',
-                'task' => 'Update' . $model . 'Task',
                 'test' => 'Update' . $model . 'Test',
             ],
             [
@@ -220,7 +215,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                 'url' => $url . '/{' . $modelRouteKey . '}',
                 'action' => 'Delete' . $model . 'Action',
                 'request' => 'Delete' . $model . 'Request',
-                'task' => 'Delete' . $model . 'Task',
                 'test' => 'Delete' . $model . 'Test',
             ],
         ];
@@ -253,16 +247,6 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                     '--section' => $sectionName,
                     '--container' => $containerName,
                     '--file' => $route['action'],
-                    '--model' => $model,
-                    '--stub' => $route['stub'],
-                ]);
-            }
-
-            if (isset($route['task'])) {
-                $this->call('laraneat:generate:task', [
-                    '--section' => $sectionName,
-                    '--container' => $containerName,
-                    '--file' => $route['task'],
                     '--model' => $model,
                     '--stub' => $route['stub'],
                 ]);
