@@ -24,7 +24,7 @@ class ServiceProviderGenerator extends GeneratorCommand implements ComponentsGen
      *
      * @var string
      */
-    protected $name = 'laraneat:generate:serviceprovider';
+    protected $name = 'laraneat:generate:provider';
 
     /**
      * The console command description.

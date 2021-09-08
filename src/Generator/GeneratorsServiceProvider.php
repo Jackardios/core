@@ -87,11 +87,11 @@ class GeneratorsServiceProvider extends ServiceProvider
         foreach ($classes as $class) {
             $lowerClass = Str::lower($class);
 
-            $this->app->singleton("command.porto.$lowerClass", function ($app) use ($class) {
+            $this->app->singleton("command.laraneat.$lowerClass", function ($app) use ($class) {
                 return $app[$class];
             });
 
-            $this->commands("command.porto.$lowerClass");
+            $this->commands("command.laraneat.$lowerClass");
         }
     }
 }

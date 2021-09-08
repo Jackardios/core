@@ -86,7 +86,7 @@ class ContainerWebGenerator extends GeneratorCommand implements ComponentsGenera
 
         // create the MainServiceProvider for the container
         $this->printInfoMessage('Generating MainServiceProvider');
-        $this->call('laraneat:generate:serviceprovider', [
+        $this->call('laraneat:generate:provider', [
             '--section' => $sectionName,
             '--container' => $containerName,
             '--file' => 'MainServiceProvider',
