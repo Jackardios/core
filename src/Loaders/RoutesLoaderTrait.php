@@ -25,6 +25,7 @@ trait RoutesLoaderTrait
 
     /**
      * Register the Containers API routes files
+     *
      * @param string $containerPath
      */
     private function loadApiContainerRoutes(string $containerPath): void
@@ -45,26 +46,22 @@ trait RoutesLoaderTrait
         }
     }
 
-    /**
-     * @param $file
-     * @param $controllerNamespace
-     */
-    private function loadApiRoute($file, $controllerNamespace): void
+    private function loadApiRoute(SplFileInfo $file, ?string $controllerNamespace = null): void
     {
         $routeGroupArray = $this->getRouteGroup($file, $controllerNamespace);
 
-        Route::group($routeGroupArray, function ($router) use ($file) {
+        Route::group($routeGroupArray, function () use ($file) {
             require $file->getPathname();
         });
     }
 
     /**
-     * @param      $endpointFileOrPrefixString
-     * @param null $controllerNamespace
+     * @param SplFileInfo|string $endpointFileOrPrefixString
+     * @param string|null $controllerNamespace
      *
-     * @return  array
+     * @return array
      */
-    public function getRouteGroup($endpointFileOrPrefixString, $controllerNamespace = null): array
+    public function getRouteGroup($endpointFileOrPrefixString, ?string $controllerNamespace = null): array
     {
         return [
             'namespace' => $controllerNamespace,
@@ -83,9 +80,6 @@ trait RoutesLoaderTrait
         ]);
     }
 
-    /**
-     * @return  null|string
-     */
     private function getRateLimitMiddleware(): ?string
     {
         $rateLimitMiddleware = null;
@@ -97,30 +91,17 @@ trait RoutesLoaderTrait
         return $rateLimitMiddleware;
     }
 
-    /**
-     * @return  mixed
-     */
-    private function getApiDomain()
+    private function getApiDomain(): string
     {
-        return config('laraneat.api.domain');
+        return config('laraneat.api.domain', '');
     }
 
-    /**
-     * @param $file
-     *
-     * @return  string
-     */
-    private function getApiVersionPrefix($file): string
+    private function getApiVersionPrefix(SplFileInfo $file): string
     {
         return config('laraneat.api.prefix') . (config('laraneat.api.enable_version_prefix') ? $this->getRouteFileVersionFromFileName($file) : '');
     }
 
-    /**
-     * @param $file
-     *
-     * @return  mixed
-     */
-    private function getRouteFileVersionFromFileName($file)
+    private function getRouteFileVersionFromFileName(SplFileInfo $file): string
     {
         $fileNameWithoutExtension = $this->getRouteFileNameWithoutExtension($file);
 
@@ -141,9 +122,9 @@ trait RoutesLoaderTrait
     /**
      * @param SplFileInfo $file
      *
-     * @return  mixed
+     * @return string
      */
-    private function getRouteFileNameWithoutExtension(SplFileInfo $file)
+    private function getRouteFileNameWithoutExtension(SplFileInfo $file): string
     {
         $fileInfo = pathinfo($file->getFileName());
 
@@ -153,9 +134,9 @@ trait RoutesLoaderTrait
     /**
      * Register the Containers WEB routes files
      *
-     * @param $containerPath
+     * @param string $containerPath
      */
-    private function loadWebContainerRoutes($containerPath): void
+    private function loadWebContainerRoutes(string $containerPath): void
     {
         // build the container web routes path
         $webRoutesPath = $containerPath . '/UI/WEB/Routes';
@@ -173,16 +154,12 @@ trait RoutesLoaderTrait
         }
     }
 
-    /**
-     * @param $file
-     * @param $controllerNamespace
-     */
-    private function loadWebRoute($file, $controllerNamespace): void
+    private function loadWebRoute(SplFileInfo $file, string $controllerNamespace): void
     {
         Route::group([
             'namespace' => $controllerNamespace,
             'middleware' => ['web'],
-        ], function ($router) use ($file) {
+        ], function () use ($file) {
             require $file->getPathname();
         });
     }
