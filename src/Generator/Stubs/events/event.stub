@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Events\Events;
 
-use App\Ship\Parents\Events\Event;
+use App\Ship\Abstracts\Events\Event;
 use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
 use Illuminate\Queue\SerializesModels;
 

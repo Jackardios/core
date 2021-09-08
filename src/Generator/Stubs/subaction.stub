@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Actions;
 
-use App\Ship\Parents\Actions\SubAction;
+use App\Ship\Abstracts\Actions\SubAction;
 
 class {{class-name}} extends SubAction
 {

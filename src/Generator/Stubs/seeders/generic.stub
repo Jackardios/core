@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Data\Seeders;
 
-use App\Ship\Parents\Seeders\Seeder;
+use App\Ship\Abstracts\Seeders\Seeder;
 
 class {{class-name}} extends Seeder
 {

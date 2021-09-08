@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\UI\API\QueryWizards;
 
-use App\Ship\Parents\QueryWizards\EloquentQueryWizard;
+use App\Ship\Abstracts\QueryWizards\EloquentQueryWizard;
 
 class {{class-name}} extends EloquentQueryWizard
 {

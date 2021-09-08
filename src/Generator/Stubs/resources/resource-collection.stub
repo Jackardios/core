@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\UI\API\Resources;
 
-use App\Ship\Parents\Resources\Json\ResourceCollection;
+use App\Ship\Abstracts\Resources\Json\ResourceCollection;
 
 class {{class-name}} extends ResourceCollection
 {

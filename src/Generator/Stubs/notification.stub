@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Notifications;
 
-use App\Ship\Parents\Notifications\Notification;
+use App\Ship\Abstracts\Notifications\Notification;
 
 class {{class-name}} extends Notification
 {

@@ -3,8 +3,8 @@
 namespace App\Containers\{{section-name}}\{{container-name}}\Actions;
 
 use App\Containers\{{section-name}}\{{container-name}}\Tasks\List{{models}}Task;
-use App\Ship\Parents\Actions\Action;
-use App\Ship\Parents\Requests\Request;
+use App\Ship\Abstracts\Actions\Action;
+use App\Ship\Abstracts\Requests\Request;
 
 class List{{models}}Action extends Action
 {

@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Models;
 
-use App\Ship\Parents\Models\Model;
+use App\Ship\Abstracts\Models\Model;
 
 class {{class-name}} extends Model
 {

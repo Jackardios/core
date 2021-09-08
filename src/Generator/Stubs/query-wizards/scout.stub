@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\UI\API\QueryWizards;
 
-use App\Ship\Parents\QueryWizards\ScoutQueryWizard;
+use App\Ship\Abstracts\QueryWizards\ScoutQueryWizard;
 
 class {{class-name}} extends ScoutQueryWizard
 {

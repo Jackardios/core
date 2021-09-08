@@ -14,7 +14,7 @@ use App\Containers\{{section-name}}\{{container-name}}\Actions\List{{models}}Act
 use App\Containers\{{section-name}}\{{container-name}}\Actions\Update{{model}}Action;
 use App\Containers\{{section-name}}\{{container-name}}\Actions\Delete{{model}}Action;
 use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
-use App\Ship\Parents\Controllers\{{base-controller}};
+use App\Ship\Abstracts\Controllers\{{base-controller}};
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
