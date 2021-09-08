@@ -40,7 +40,7 @@ trait TestsUrlHelperTrait
             return $this->addQueryParametersToUrl($path, $queryParameters);
         }
 
-        $apiDomain = $this->trimSlashes(config('laraneat.api.domain'));
+        $apiDomain = $this->trimSlashes(config('app.url'));
         $url = $apiDomain.'/'.$this->trimSlashes($path);
 
         if ($replaces) {
