@@ -31,7 +31,8 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.15",
-        "mockery/mockery": "^1.4.2",
+        "mockery/mockery": "^1.4.3",
+        "phpunit/phpunit": "^9.0",
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {
