@@ -6,7 +6,6 @@ use Laraneat\Core\Generator\GeneratorCommand;
 use Laraneat\Core\Generator\Interfaces\ComponentsGenerator;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Support\Str;
-use LogicException;
 
 class FactoryGenerator extends GeneratorCommand implements ComponentsGenerator
 {
