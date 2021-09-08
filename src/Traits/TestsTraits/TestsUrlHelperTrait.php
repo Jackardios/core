@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraneat\Core\Traits\TestsTraits\PhpUnit;
+namespace Laraneat\Core\Traits\TestsTraits;
 
 use Illuminate\Support\Str;
 

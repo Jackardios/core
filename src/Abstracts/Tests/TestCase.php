@@ -2,8 +2,8 @@
 
 namespace Laraneat\Core\Abstracts\Tests;
 
-use Laraneat\Core\Traits\TestsTraits\PhpUnit\TestsAuthHelperTrait;
-use Laraneat\Core\Traits\TestsTraits\PhpUnit\TestsUrlHelperTrait;
+use Laraneat\Core\Traits\TestsTraits\TestsAuthHelperTrait;
+use Laraneat\Core\Traits\TestsTraits\TestsUrlHelperTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
 
