@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraneat\Core\Abstracts\Tests\PhpUnit;
+namespace Laraneat\Core\Abstracts\Tests;
 
 use Laraneat\Core\Traits\TestsTraits\PhpUnit\TestsAuthHelperTrait;
 use Laraneat\Core\Traits\TestsTraits\PhpUnit\TestsUrlHelperTrait;
