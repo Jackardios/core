@@ -3,6 +3,7 @@
 namespace Laraneat\Core\Traits\TestsTraits;
 
 use Illuminate\Support\Str;
+use Laraneat\Core\Exceptions\InvalidPath;
 
 trait TestsUrlHelperTrait
 {
@@ -34,8 +35,14 @@ trait TestsUrlHelperTrait
         return trim($path, '/');
     }
 
-    public function buildUrl(string $path, array $queryParameters = [], array $replaces = []): string
+    public function buildUrl(?string $path = null, array $queryParameters = [], array $replaces = []): string
     {
+        $path = $path ?? $this->url ?? null;
+
+        if (!$path) {
+            throw InvalidPath::make($path);
+        }
+
         if($this->isAbsoluteUrl($path)) {
             return $this->addQueryParametersToUrl($path, $queryParameters);
         }
@@ -50,8 +57,14 @@ trait TestsUrlHelperTrait
         return $this->addQueryParametersToUrl($url, $queryParameters);
     }
 
-    public function buildApiUrl(string $path, array $queryParameters = [], array $replaces = []): string
+    public function buildApiUrl(?string $path = null, array $queryParameters = [], array $replaces = []): string
     {
+        $path = $path ?? $this->url ?? null;
+
+        if (!$path) {
+            throw InvalidPath::make($path);
+        }
+
         if($this->isAbsoluteUrl($path)) {
             return $this->addQueryParametersToUrl($path, $queryParameters);
         }
