@@ -19,7 +19,7 @@ class TestFunctionalTestGenerator extends GeneratorCommand implements Components
         ['ui', null, InputOption::VALUE_OPTIONAL, 'The user-interface to generate the Test for.'],
         ['model', 'm', InputOption::VALUE_OPTIONAL, 'The model that the test applies to.'],
         ['stub', null, InputOption::VALUE_OPTIONAL, 'The stub file to load for this generator.'],
-        ['endpoint', 'e', InputOption::VALUE_OPTIONAL, 'The endpoint to be called within this test.'],
+        ['url', 'u', InputOption::VALUE_OPTIONAL, 'The url to be called within this test.'],
     ];
 
     /**
@@ -62,7 +62,7 @@ class TestFunctionalTestGenerator extends GeneratorCommand implements Components
 
         $stub = 'generic';
         if ($ui === 'api' || $ui === 'web') {
-            $endpoint = $this->checkParameterOrAsk('endpoint', 'Enter endpoint to be called within this test.', 'method@endpoint');
+            $url = $this->checkParameterOrAsk('url', 'Enter url to be called within this test.');
             $model = $this->checkParameterOrAsk('model', 'Enter the name of the model this action is for.');
 
             if ($model) {
@@ -108,7 +108,7 @@ class TestFunctionalTestGenerator extends GeneratorCommand implements Components
                 'entities' => $entities ?? null,
                 'kebab-entities' => isset($entities) ? Str::kebab($entities) : null,
                 'table' => $table ?? null,
-                'endpoint' => $endpoint ?? null,
+                'url' => $url ?? null,
             ],
             'file-parameters' => [
                 'file-name' => $this->fileName,

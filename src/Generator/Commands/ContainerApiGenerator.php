@@ -261,7 +261,7 @@ class ContainerApiGenerator extends GeneratorCommand implements ComponentsGenera
                     '--ui' => $ui,
                     '--model' => $model,
                     '--stub' => $route['stub'],
-                    '--endpoint' => Str::lower($route['verb']) . '@' . $apiPrefix . '/v' . $version . '/' . $urlWithReplacedRouteKey,
+                    '--url' => $apiPrefix . '/v' . $version . '/' . $urlWithReplacedRouteKey,
                 ]);
             }
         }

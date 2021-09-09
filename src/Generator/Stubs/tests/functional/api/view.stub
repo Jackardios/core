@@ -13,45 +13,63 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
  */
 class {{class-name}} extends ApiTestCase
 {
-    // the endpoint to be called within this test (e.g., {{endpoint}})
-    protected string $endpoint = '{{endpoint}}';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => 'view-{{kebab-entities}}',
         'roles'       => '',
     ];
 
-    public function testViewExisting{{model}}(): void
+    public function testView{{model}}(): void
     {
+        $this->getTestingUser();
+
         ${{entity}} = {{model}}::factory()->create();
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
+        $expectedData = [
+            'id' => ${{entity}}->getKey(),
+            // ...
+        ];
 
-        $response = $this->injectId(${{entity}}->id)->makeCall();
-
-        $response->assertStatus(200);
-        $responseContent = $this->getResponseContentObject();
-
-        $this->assertResponseContainKeyValue([
-            // 'key' => ${{entity}}->key
-        ]);
+        $this->getJson($url)
+            ->assertOk()
+            ->assertJson(fn (AssertableJson $json) =>
+            $json->has('_profiler')
+                ->has('data', fn (AssertableJson $json) =>
+                $json->whereAll($expectedData)
+                    ->etc()
+                )
+            );
     }
 
-    public function testViewExisting{{model}}WithoutAccess(): void
+    public function testView{{model}}WithoutAccess(): void
     {
         $this->getTestingUserWithoutAccess();
+
         ${{entity}} = {{model}}::factory()->create();
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
 
-        $response = $this->injectId(${{entity}}->id)->makeCall();
-
-        $response->assertStatus(403);
+        $this->getJson($url)
+            ->assertForbidden();
     }
 
     public function testViewNotExisting{{model}}(): void
     {
+        $this->getTestingUser();
+
         $fake{{model}}Id = 7777;
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => $fake{{model}}Id]
+        );
 
-        $response = $this->injectId($fake{{model}}Id)->makeCall();
-
-        $response->assertStatus(404);
+        $this->getJson($url)
+            ->assertNotFound();
     }
 }

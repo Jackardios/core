@@ -13,42 +13,51 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
  */
 class {{class-name}} extends ApiTestCase
 {
-    // the endpoint to be called within this test (e.g., {{endpoint}})
-    protected string $endpoint = '{{endpoint}}';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => 'delete-{{kebab-entities}}',
         'roles'       => '',
     ];
 
-    public function testDeleteExisting{{model}}WithAccess(): void
+    public function testDelete{{model}}(): void
     {
+        $this->getTestingUser();
+
         ${{entity}} = {{model}}::factory()->create();
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
 
-        $response = $this->injectId(${{entity}}->id)->makeCall();
+        $this->deleteJson($url)->assertNoContent();
 
-        $response->assertStatus(204);
-        $this->assertDatabaseMissing('{{table}}', [
-            'id' => ${{entity}}->id
-        ]);
+        $this->assertNull({{model}}::find(${{entity}}->getKey()));
     }
 
-    public function testDeleteExisting{{model}}WithoutAccess(): void
+    public function testDelete{{model}}WithoutAccess(): void
     {
         $this->getTestingUserWithoutAccess();
+
         ${{entity}} = {{model}}::factory()->create();
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
 
-        $response = $this->injectId(${{entity}}->id)->makeCall();
-
-        $response->assertStatus(403);
+        $this->deleteJson($url)->assertForbidden();
     }
 
     public function testDeleteNotExisting{{model}}(): void
     {
-        $fake{{model}}Id = 777;
-        $response = $this->injectId($fake{{model}}Id)->makeCall();
+        $this->getTestingUser();
 
-        $response->assertStatus(404);
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => '12345']
+        );
+
+        $this->deleteJson($url)
+            ->assertNotFound();
     }
 }

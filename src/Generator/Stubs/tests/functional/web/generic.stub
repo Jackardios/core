@@ -12,10 +12,11 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\WebTestCase;
  */
 class {{class-name}} extends WebTestCase
 {
-    // the endpoint to be called within this test (e.g., get@users)
-    protected string $endpoint = 'method@endpoint';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => '',
         'roles'       => '',

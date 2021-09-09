@@ -81,6 +81,6 @@ class TestUnitTestGenerator extends GeneratorCommand implements ComponentsGenera
 
     public function getDefaultFileName(): string
     {
-        return 'DefaultUnitTest';
+        return 'DefaultTest';
     }
 }

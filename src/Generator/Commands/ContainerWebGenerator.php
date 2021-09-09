@@ -265,7 +265,7 @@ class ContainerWebGenerator extends GeneratorCommand implements ComponentsGenera
                     '--ui' => $ui,
                     '--model' => $model,
                     '--stub' => $route['stub'],
-                    '--endpoint' => Str::lower($route['verb']) . '@' . $urlWithReplacedRouteKey,
+                    '--url' => $urlWithReplacedRouteKey,
                 ]);
             }
         }

@@ -2,6 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\UI\API\Tests\Functional;
 
+use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
 use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
 
 /**
@@ -12,43 +13,48 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
  */
 class {{class-name}} extends ApiTestCase
 {
-    // the endpoint to be called within this test (e.g., {{endpoint}})
-    protected string $endpoint = '{{endpoint}}';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => 'create-{{kebab-entities}}',
         'roles'       => '',
     ];
 
-    public function testCreateNew{{model}}WithData(): void
+    protected function getTestData(): array
     {
-        $data = [
-            // 'key' => 'value'
+        return [
+           // 'key' => 'value'
         ];
-
-        $response = $this->makeCall($data);
-
-        $response->assertStatus(201);
-        $this->assertResponseContainKeyValue([
-            // 'key' => $data['key']
-        ]);
-        $responseContent = $this->getResponseContentObject();
-        self::assertNotEmpty($responseContent->data);
-        $this->assertDatabaseHas('{{table}}', [
-            // 'key' => $data['key']
-        ]);
     }
 
-    public function testCreateNew{{model}}WithoutAccess(): void
+    public function testCreate{{model}}(): void
+    {
+        $this->getTestingUser();
+        $data = $this->getTestData();
+
+        $this->postJson($this->buildApiUrl(), $data)
+            ->assertCreated()
+            ->assertJson(fn (AssertableJson $json) =>
+                $json->has('_profiler')
+                    ->has('data', fn (AssertableJson $json) =>
+                        $json->has('id')
+                            ->whereAll($data)
+                            ->etc()
+                        )
+            );
+
+        $this->assertExistsModelWithAttributes({{model}}::class, $data);
+    }
+
+    public function testCreate{{model}}WithoutAccess(): void
     {
         $this->getTestingUserWithoutAccess();
-        $data = [
-            // 'key' => 'value'
-        ];
+        $data = $this->getTestData();
 
-        $response = $this->makeCall($data);
-
-        $response->assertStatus(403);
+        $this->postJson($this->buildApiUrl(), $data)
+            ->assertStatus(403);
     }
 }

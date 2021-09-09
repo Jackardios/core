@@ -12,10 +12,11 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
  */
 class {{class-name}} extends ApiTestCase
 {
-    // the endpoint to be called within this test (e.g., get@api/v1/users)
-    protected string $endpoint = 'method@endpoint';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => '',
         'roles'       => '',
@@ -23,16 +24,6 @@ class {{class-name}} extends ApiTestCase
 
     public function test(): void
     {
-        $data = [
-            // 'key' => 'value',
-        ];
-
-        // send the HTTP request
-        $response = $this->makeCall($data);
-
-        // assert the response status
-        $response->assertStatus(200);
-
-        // make other asserts here
+        //
     }
 }

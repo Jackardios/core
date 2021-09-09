@@ -13,61 +13,76 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\ApiTestCase;
  */
 class {{class-name}} extends ApiTestCase
 {
-    // the endpoint to be called within this test (e.g., {{endpoint}})
-    protected string $endpoint = '{{endpoint}}';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => 'update-{{kebab-entities}}',
         'roles'       => '',
     ];
 
-    public function testUpdateExisting{{model}}WithAccess(): void
+    public function testUpdate{{model}}(): void
     {
+        $this->getTestingUser();
+
         ${{entity}} = {{model}}::factory()->create();
+
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
+
         $data = [
-            // 'key' => 'value'
+            //
         ];
-
-        $response = $this->injectId(${{entity}}->id)->makeCall($data);
-
-        $response->assertStatus(200);
-        $this->assertResponseContainKeyValue([
-            'object' => '{{model}}',
-            // 'key' => $data['key'],
+        $expectedData = array_merge($data, [
+            'id' => ${{entity}}->getKey(),
         ]);
-        $this->assertDatabaseHas('{{table}}', [
-            'id' => ${{entity}}->id,
-            // 'key' => $data['key'],
-        ]);
+
+        $this->patchJson($url, $data)
+            ->assertOk()
+            ->assertJson(fn (AssertableJson $json) =>
+            $json->has('_profiler')
+                ->has('data', fn (AssertableJson $json) =>
+                $json->whereAll($expectedData)
+                    ->etc()
+                )
+            );
+
+        $this->assertExistsModelWithAttributes({{model}}::class, $expectedData);
     }
 
-    public function testUpdateExisting{{model}}WithoutAccess(): void
+    public function testUpdate{{model}}WithoutAccess(): void
     {
         $this->getTestingUserWithoutAccess();
 
         ${{entity}} = {{model}}::factory()->create();
+
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => ${{entity}}->getKey()]
+        );
         $data = [
-            // 'key' => 'value'
+            //
         ];
 
-        $response = $this->injectId(${{entity}}->id)->makeCall($data);
-
-        $response->assertStatus(403);
-        // $this->assertDatabaseMissing('{{table}}', [
-        //     'key' => $data['key']
-        // ]);
+        $this->patchJson($url, $data)
+            ->assertStatus(403);
     }
 
     public function testUpdateNonExisting{{model}}(): void
     {
-        $data = [
-            'title' => 'Updated {{model}} Title',
-        ];
+        $this->getTestingUser();
+
         $fake{{model}}Id = 7777;
+        $url = $this->buildApiUrl(
+            replaces: ['{id}' => $fake{{model}}Id]
+        );
+        $data = [
+            //
+        ];
 
-        $response = $this->injectId($fake{{model}}Id)->makeCall($data);
-
-        $response->assertStatus(404);
+        $this->patchJson($url, $data)
+            ->assertStatus(404);
     }
 }

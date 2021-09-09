@@ -13,16 +13,17 @@ use App\Containers\{{section-name}}\{{container-name}}\Tests\WebTestCase;
  */
 class {{class-name}} extends WebTestCase
 {
-    // the endpoint to be called within this test (e.g., {{endpoint}})
-    protected string $endpoint = '{{endpoint}}';
+    protected string $url = '{{url}}';
 
-    // fake some access rights
+    /**
+     * Roles and permissions, to be attached on the user by default
+     */
     protected array $access = [
         'permissions' => 'delete-{{kebab-entities}}',
         'roles'       => '',
     ];
 
-    public function testDeleteExisting{{model}}WithAccess(): void
+    public function testDeleteExisting{{model}}(): void
     {
         ${{entity}} = {{model}}::factory()->create();
 
