@@ -2,7 +2,7 @@
 
 namespace Laraneat\Core\Traits;
 
-use Laraneat\Core\Abstracts\Requests\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use LogicException;
 

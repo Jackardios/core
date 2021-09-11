@@ -2,10 +2,10 @@
 
 namespace Laraneat\Core\Commands;
 
-use Laraneat\Core\Abstracts\Commands\ConsoleCommand;
+use Illuminate\Console\Command;
 use Laraneat\Core\Foundation\Laraneat;
 
-class GetLaraneatVersionCommand extends ConsoleCommand
+class GetLaraneatVersionCommand extends Command
 {
     /**
      * The name and signature of the console command.

@@ -2,9 +2,9 @@
 
 namespace Laraneat\Core\Commands;
 
-use Laraneat\Core\Abstracts\Commands\ConsoleCommand;
+use Illuminate\Console\Command;
 
-class SeedTestingDataCommand extends ConsoleCommand
+class SeedTestingDataCommand extends Command
 {
     /**
      * The name and signature of the console command.

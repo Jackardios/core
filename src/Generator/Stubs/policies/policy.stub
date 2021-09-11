@@ -2,7 +2,7 @@
 
 namespace App\Containers\{{section-name}}\{{container-name}}\Policies;
 
-use Laraneat\Core\Abstracts\Policies\Policy;
+use App\Ship\Abstracts\Policies\Policy;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use App\Containers\{{section-name}}\{{container-name}}\Models\{{model}};
 use {{namespaced-user-model}};

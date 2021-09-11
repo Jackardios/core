@@ -2,7 +2,7 @@
 
 namespace Laraneat\Core\Exceptions;
 
-use Laraneat\Core\Abstracts\Exceptions\Exception;
+use App\Ship\Abstracts\Exceptions\Exception;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class GeneratorErrorException extends Exception

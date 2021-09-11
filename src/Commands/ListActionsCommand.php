@@ -2,12 +2,12 @@
 
 namespace Laraneat\Core\Commands;
 
-use Laraneat\Core\Abstracts\Commands\ConsoleCommand;
+use Illuminate\Console\Command;
 use Laraneat\Core\Foundation\Facades\Laraneat;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class ListActionsCommand extends ConsoleCommand
+class ListActionsCommand extends Command
 {
     /**
      * The name and signature of the console command.

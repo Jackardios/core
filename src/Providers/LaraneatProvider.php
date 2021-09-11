@@ -2,22 +2,18 @@
 
 namespace Laraneat\Core\Providers;
 
-use Laraneat\Core\Abstracts\Events\Providers\EventServiceProvider;
-use Laraneat\Core\Abstracts\Providers\MainProvider as AbstractMainProvider;
+use Illuminate\Support\ServiceProvider;
 use Laraneat\Core\Foundation\Laraneat;
 use Laraneat\Core\Loaders\AutoLoaderTrait;
 use Laraneat\Core\Traits\ValidationTrait;
-use Illuminate\Support\Facades\App;
 
-class LaraneatProvider extends AbstractMainProvider
+class LaraneatProvider extends ServiceProvider
 {
     use AutoLoaderTrait;
     use ValidationTrait;
 
     public function boot(): void
     {
-        parent::boot();
-
         $this->offerPublishing();
 
         // Autoload most of the Containers and Ship Components
@@ -29,11 +25,7 @@ class LaraneatProvider extends AbstractMainProvider
 
     public function register(): void
     {
-        parent::register();
-
         $this->mergeConfig();
-
-        $this->overrideLaravelBaseProviders();
 
         // Register Core Facade Classes, should not be registered in the $aliases property, since they are used
         // by the auto-loading scripts, before the $aliases property is executed.
@@ -58,15 +50,5 @@ class LaraneatProvider extends AbstractMainProvider
         $this->publishes([
             __DIR__.'/../../config/laraneat.php' => config_path('laraneat.php'),
         ], 'config');
-    }
-
-    /**
-     * Register Override Base providers
-     * @see \Illuminate\Foundation\Application::registerBaseServiceProviders
-     */
-    protected function overrideLaravelBaseProviders(): void
-    {
-        // The custom Laraneat EventServiceProvider
-        App::register(EventServiceProvider::class);
     }
 }
