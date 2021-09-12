@@ -32,16 +32,15 @@ trait RoutesLoaderTrait
     {
         // Build the container api routes path
         $apiRoutesPath = $containerPath . '/UI/API/Routes';
-        // Build the namespace from the path
-        $controllerNamespace = str_replace('/', '\\', $containerPath) . '\\UI\\API\\Controllers';
 
+        // TODO: ADD DEFAULT NAMESPACE FOR CONTROLLERS
         if (File::isDirectory($apiRoutesPath)) {
             $files = File::allFiles($apiRoutesPath);
             $files = Arr::sort($files, function ($file) {
                 return $file->getFilename();
             });
             foreach ($files as $file) {
-                $this->loadApiRoute($file, $controllerNamespace);
+                $this->loadApiRoute($file);
             }
         }
     }
@@ -140,21 +139,20 @@ trait RoutesLoaderTrait
     {
         // build the container web routes path
         $webRoutesPath = $containerPath . '/UI/WEB/Routes';
-        // build the namespace from the path
-        $controllerNamespace = $containerPath . '\\UI\WEB\Controllers';
 
+        // TODO: ADD DEFAULT NAMESPACE FOR CONTROLLERS
         if (File::isDirectory($webRoutesPath)) {
             $files = File::allFiles($webRoutesPath);
             $files = Arr::sort($files, function ($file) {
                 return $file->getFilename();
             });
             foreach ($files as $file) {
-                $this->loadWebRoute($file, $controllerNamespace);
+                $this->loadWebRoute($file);
             }
         }
     }
 
-    private function loadWebRoute(SplFileInfo $file, string $controllerNamespace): void
+    private function loadWebRoute(SplFileInfo $file, ?string $controllerNamespace = null): void
     {
         Route::group([
             'namespace' => $controllerNamespace,
