@@ -33,7 +33,7 @@ trait RoutesLoaderTrait
         // Build the container api routes path
         $apiRoutesPath = $containerPath . '/UI/API/Routes';
         // Build the namespace from the path
-        $controllerNamespace = $containerPath . '\\UI\API\Controllers';
+        $controllerNamespace = str_replace('/', '\\', $containerPath) . '\\UI\\API\\Controllers';
 
         if (File::isDirectory($apiRoutesPath)) {
             $files = File::allFiles($apiRoutesPath);
